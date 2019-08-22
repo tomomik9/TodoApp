@@ -1,6 +1,7 @@
 var app = new Vue({
     el: '#app',
     data: {
+        storageKey: 'todolist',
         newtask: '',
         todolist: []
     },
@@ -15,5 +16,22 @@ var app = new Vue({
                 this.todolist.splice(index, 1);
             }
         }
-    }
+    },
+    created: function() {
+        var dataStr = localStorage.getItem(this.storageKey);
+        if (dataStr) {
+            this.todolist = JSON.parse(dataStr);
+        }
+    },
+    watch: {
+        todolist: {
+            handler: function() {
+                localStorage.setItem(
+                    this.storageKey,
+                    JSON.stringify(this.todolist)
+                );
+            },
+            deep: true
+        }
+    }    
 });
