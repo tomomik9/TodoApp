@@ -6,7 +6,7 @@ var app = new Vue({
         todolist: []
     },
     methods: {
-        addTodo: function() {
+        addTask: function() {
             if (this.newtask == '') return;
             this.todolist.push({ text: this.newtask, done: false, hover: false}); 
             this.newtask = '';
