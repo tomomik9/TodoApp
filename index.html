@@ -4,8 +4,40 @@
     <meta charset="UTF-8" />
     <title>Todo App</title>
     <link rel="stylesheet" href="css/main.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Hepta+Slab|Pragati+Narrow&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
+    <div id="app">
+      <h1>Todo lists</h1>
+      <p>
+        Hi! This app is very simple and make it fast to add and organize tasks.
+      </p>
+      <input
+        type="text"
+        v-model.trim="newtask"
+        placeholder="New task"
+        size="30"
+      />
+      <button class="add" @click="addTask">Add +</button>
+      <ul>
+        <li
+          class="todolist"
+          v-for="(todo, index) in todolist"
+          v-bind:class="{done: todo.done}"
+          @mouseover="todo.hover=true"
+          @mouseout="todo.hover=false"
+        >
+          <input type="checkbox" v-model="todo.done" />
+          <span>{{ todo.text }}</span>
+          <button class="delete" @click="remove(index)" v-show="todo.done">
+            Delete
+          </button>
+        </li>
+      </ul>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
     <script src="js/main.js"></script>
   </body>
